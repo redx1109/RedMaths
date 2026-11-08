@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>RedMaths — Mathematics, from counting to research</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23FF4D3D'/%3E%3Cstop offset='1' stop-color='%238B5CF6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230A0810'/%3E%3Ccircle cx='16' cy='16' r='7' fill='url(%23g)'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Background Canvas Animation -->
+<canvas id="math-bg"></canvas>
+
+<!-- Background Music -->
+<audio id="bg-music" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3"></audio>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand" onclick="navigate('home')"><span class="brand-red">Red</span>Maths</div>
+    <nav class="links">
+      <a onclick="navigate('home')">Home</a>
+      <a onclick="navigateStage('00')">Origin</a>
+      <a onclick="navigateStage('01')">Structure</a>
+      <a onclick="navigateStage('02')">Dynamics</a>
+      <a onclick="navigateStage('03')">Abstraction</a>
+      <a onclick="navigateStage('04')">Frontier</a>
+    </nav>
+    <button class="toggle" id="themeBtn" aria-label="Toggle theme">☾</button>
+  </div>
+</header>
+
+<!-- ================= HOME VIEW ================= -->
+<main id="view-home" class="view active">
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="orb a"></div>
+      <div class="orb b"></div>
+      <div class="gridlines"></div>
+    </div>
+    <div class="wrap hero-inner">
+      
+      <div class="hero-logo">
+        <span class="brand-red">Red</span>Maths
+      </div>
+
+      <p class="eyebrow">
+        <span>Mathematics · Ground up</span>
+        <span class="sep">|</span>
+        <span>From counting to <em>research</em>.</span>
+      </p>
+
+      <p class="lede">
+        Every lesson shows <b>exactly what it needs</b> and <b>exactly what it unlocks</b>.
+        Choose a stage below to enter its isolated map.
+      </p>
+      
+      <button class="btn primary" onclick="navigateStage('00')">Begin at Origin →</button>
+    </div>
+  </section>
+
+  <section class="tracks">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:24px; text-align:center;">
+        <h2 style="font:400 28px/1.1 var(--f-disp);margin:0 0 8px">The Five Stages</h2>
+        <p style="color:var(--muted);max-width:50ch;margin:0 auto;font-size:14px;">Mathematical maturity is a journey. Start at the foundation and work your way to the research frontier.</p>
+      </div>
+      
+      <div class="tracks-grid">
+        <div class="track-card" style="--track-color: var(--lvl-00)" onclick="navigateStage('00')">
+          <div class="track-num">01</div>
+          <div>
+            <div class="track-title">Origin</div>
+            <div class="track-desc">Numbers, basic operations, and the birth of algebra.</div>
+          </div>
+          <div class="track-count">7 Lessons</div>
+        </div>
+        
+        <div class="track-card" style="--track-color: var(--lvl-01)" onclick="navigateStage('01')">
+          <div class="track-num">02</div>
+          <div>
+            <div class="track-title">Structure</div>
+            <div class="track-desc">Functions, geometry, and the rules that govern them.</div>
+          </div>
+          <div class="track-count">10 Lessons</div>
+        </div>
+        
+        <div class="track-card" style="--track-color: var(--lvl-02)" onclick="navigateStage('02')">
+          <div class="track-num">03</div>
+          <div>
+            <div class="track-title">Dynamics</div>
+            <div class="track-desc">Calculus, limits, and the mathematics of change.</div>
+          </div>
+          <div class="track-count">13 Lessons</div>
+        </div>
+        
+        <div class="track-card" style="--track-color: var(--lvl-03)" onclick="navigateStage('03')">
+          <div class="track-num">04</div>
+          <div>
+            <div class="track-title">Abstraction</div>
+            <div class="track-desc">Groups, topology, and the deep structures of math.</div>
+          </div>
+          <div class="track-count">12 Lessons</div>
+        </div>
+        
+        <div class="track-card" style="--track-color: var(--lvl-04)" onclick="navigateStage('04')">
+          <div class="track-num">05</div>
+          <div>
+            <div class="track-title">Frontier</div>
+            <div class="track-desc">Research-level topics and modern geometry.</div>
+          </div>
+          <div class="track-count">8 Lessons</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="playground" style="padding:60px 0;border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head" style="text-align:center;margin-bottom:30px;">
+        <h2 style="font:400 28px/1.1 var(--f-disp);margin:0 0 8px">Playground</h2>
+        <p style="color:var(--muted);font-size:14px;padding-inline:20px;">Riemann sums for ∫₀ᵇ x² dx. Drag to watch the approximation chase the exact value.</p>
+      </div>
+      <div class="play">
+        <canvas id="plot"></canvas>
+        <div class="controls">
+          <div class="ctrl">
+            <label for="nSlider">Rectangles <b id="nOut">8</b></label>
+            <input id="nSlider" type="range" min="1" max="60" step="1" value="8">
+          </div>
+          <div class="ctrl">
+            <label for="bSlider">Upper limit b <b id="bOut">2.0</b></label>
+            <input id="bSlider" type="range" min="0.5" max="2.5" step="0.1" value="2">
+          </div>
+          <div class="readout">
+            <div><span>exact b³/3</span><b id="exact">2.6667</b></div>
+            <div><span>right sum</span><b id="approx">3.7500</b></div>
+            <div><span>error</span><b id="error">1.0833</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= STAGE VIEW ================= -->
+<main id="view-stage" class="view">
+  <div class="stage-header">
+    <div class="wrap">
+      <div class="stage-title-wrap">
+        <div class="back-btn" onclick="navigate('home')">← Back to Stages</div>
+        <h2 id="stage-name"><span class="stage-dot" id="stage-dot"></span> Stage Name</h2>
+      </div>
+      <div class="progress-strip" style="border:none; padding:0;">
+        <span id="count">0 of 50 learned</span>
+        <span class="bar"><i id="barfill"></i></span>
+        <span class="pct" id="pct">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flowchart-shell" id="flowchart-shell">
+    <div id="zoom-container">
+      <div class="flowchart" id="flowchart">
+        <svg id="connections"></svg>
+        <div class="nodes-layer" id="nodes-layer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="zoom-controls">
+    <button class="zoom-btn" onclick="changeZoom(0.1)">+</button>
+    <button class="zoom-btn" onclick="changeZoom(-0.1)">−</button>
+  </div>
+</main>
+
+<div class="detail-backdrop" id="detailBackdrop"></div>
+<aside class="detail" id="detail" aria-hidden="true" role="dialog">
+  <button class="detail-close" id="detailClose" aria-label="Close">✕</button>
+  <div id="detailContent"></div>
+</aside>
+
+<!-- MUSIC PLAYER -->
+<div class="music-player" id="musicPlayer" onclick="toggleMusic()">
+  <div class="music-icon">🎵</div>
+  <div class="music-text">Play</div>
+  <div class="music-visualizer">
+    <div class="music-bar"></div>
+    <div class="music-bar"></div>
+    <div class="music-bar"></div>
+    <div class="music-bar"></div>
+  </div>
+</div>
+
+<div class="audio-prompt" id="audioPrompt">
+  Click to start music
+</div>
+
+<footer>
+  <div class="wrap row">
+    <div>
+      <div class="brand"><span class="brand-red">Red</span>Maths</div>
+      <p style="margin-top:4px">Built from the ground up. Sibling of RedPhysics.</p>
+    </div>
+    <p class="mono">00 → 04 · prerequisites always visible</p>
+  </div>
+</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
