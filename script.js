@@ -71,7 +71,8 @@ const LESSONS = [
   { id:'r7', level:'04', title:'Probability theory', intuition:'Measure theory applied to events.', formula:'P\\Big(\\bigcup_n A_n\\Big) = \\sum_n P(A_n)', needs:['a11','b10'] },
   { id:'r8', level:'04', title:'Stochastic processes', intuition:'Random variables indexed by time.', formula:'\\mathbb{E}[X_{t+s}\\mid\\mathcal{F}_s] = X_s', needs:['r7'] }
 ];
-
+const unlocks = {};
+LESSONS.forEach(l => l.needs.forEach(n => (unlocks[n] = unlocks[n] || []).push(l.id)));
 /* ============================================================
    STATE & ELEMENTS
    ============================================================ */
