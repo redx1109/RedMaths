@@ -1,25 +1,11 @@
 {
-    "name": "RedMaths",
-    "short_name": "RedMaths",
-    "display": "standalone",
-    "start_url": "/",
-    "theme_color": "#0A0809",
-    "background_color": "#0A0809",
-    "icons": [
-        {
-            "src": "favicon.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        },
-        {
-            "src": "favicon.png",
-            "sizes": "1024x1024",
-            "type": "image/png"
-        },
-        {
-            "src": "favicon.png",
-            "sizes": "256x256",
-            "type": "image/png"
-        }
-    ]
+  "name": "RedMaths",
+  "short_name": "RedMaths",
+  "display": "standalone",
+  "start_url": "./",
+  "theme_color": "#0A0809",
+  "background_color": "#0A0809",
+  "icons": [
+    { "src": "favicon.png", "sizes": "1254x1254", "type": "image/png" }
+  ]
 }
