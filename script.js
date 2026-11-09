@@ -37,6 +37,7 @@ function navigate(viewId) {
   document.getElementById(`view-${viewId}`).classList.add('active');
   if (viewId === 'home') draw();
   window.scrollTo(0, 0);
+  if (viewId !== 'stage') history.replaceState(null, '', viewId === 'home' ? location.pathname : '#' + viewId);
 }
 
 function computeSubLayout(stageLessons) {
@@ -89,7 +90,7 @@ function computeSubLayout(stageLessons) {
 function navigateStage(lv) {
   currentStage = lv;
   navigate('stage');
-  
+  history.replaceState(null, '', '#stage-' + lv);
   document.getElementById('stage-name').innerHTML = `<span class="stage-dot" style="background:var(--lvl-${lv})"></span> ${lv} · ${LEVELS[lv]}`;
   
   const stageLessons = LESSONS.filter(l => l.level === lv);
@@ -346,6 +347,30 @@ document.addEventListener('keydown', e => {
   else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
 });
 
+/* pinch zoom */
+let pinchDist = 0, pinchStart = 1;
+const tDist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+shell.addEventListener('touchstart', e => {
+  if (e.touches.length === 2) {
+    pinchDist = tDist(e.touches); pinchStart = currentZoom;
+    zoomCont.style.transition = 'none';
+  }
+}, {passive:true});
+shell.addEventListener('touchmove', e => {
+  if (e.touches.length !== 2 || !pinchDist) return;
+  e.preventDefault();
+  currentZoom = Math.max(0.4, Math.min(1.2, pinchStart * tDist(e.touches) / pinchDist));
+  zoomCont.style.transform = `scale(${currentZoom})`;
+}, {passive:false});
+const endPinch = e => { if (e.touches.length < 2) { pinchDist = 0; zoomCont.style.transition = ''; } };
+shell.addEventListener('touchend', endPinch);
+shell.addEventListener('touchcancel', endPinch);
+/* trackpad pinch (desktop) */
+shell.addEventListener('wheel', e => {
+  if (!e.ctrlKey) return;
+  e.preventDefault(); changeZoom(-e.deltaY * 0.01);
+}, {passive:false});
+
 /* theme */
 const getTheme = () => { try { return getTheme() } catch(e){ return null } };
 const setTheme = t => { try { localStorage.setItem('redmaths.theme', t) } catch(e){} };
@@ -364,11 +389,16 @@ themeBtn.addEventListener('click', () => {
 /* ============================================================
    BOOT
    ============================================================ */
+function route(){
+  const h = location.hash.slice(1);
+  if (h.startsWith('stage-') && LEVELS[h.slice(6)]) navigateStage(h.slice(6));
+  else navigate(h === 'journey' ? 'journey' : 'home');
+}
 function boot(){
   updateProgress();
   onSlide();
-  navigateStage('00'); 
-  navigate('home'); 
+  route();
+  window.addEventListener('hashchange', route);
 }
 if(document.readyState === 'loading'){
   document.addEventListener('DOMContentLoaded', boot);
