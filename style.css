@@ -375,7 +375,7 @@ footer .mono{font:500 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:u
 /* MOBILE SPECIFIC MEDIA QUERIES */
 @media(max-width: 768px){
   header.site .wrap { height: 60px; gap: 12px; }
-  nav.links { display: none; } /* Hide desktop nav on mobile */
+  nav.links { flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap; margin-left: 0; gap: 14px; scrollbar-width: none; }
   .hero { padding-top: 30px; }
   .eyebrow { flex-direction: column; gap: 6px; font-size: 10px; }
   .eyebrow .sep { display: none; }
