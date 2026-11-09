@@ -1,3 +1,4 @@
+let lastFocus = null;
 /* ============================================================
    DATA & LEVELS
    ============================================================ */
@@ -439,10 +440,15 @@ function openDetail(id){
       </button>
     </div>`;
 
+  lastFocus = document.activeElement;
+  detail.inert = false;
   detail.classList.add('open');
+  document.getElementById('detailClose').focus();
   detailBack.classList.add('open');
   detail.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
+  detail.inert = true;
+  if (lastFocus) lastFocus.focus();
 }
 function closeDetail(){
   activeDetailId = null;
@@ -523,6 +529,14 @@ document.getElementById('detailClose').addEventListener('click', closeDetail);
 detailBack.addEventListener('click', closeDetail);
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape' && activeDetailId) closeDetail();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Tab' || !activeDetailId) return;
+  const f = detail.querySelectorAll('button');
+  const first = f[0], last = f[f.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
 });
 
 /* theme */
