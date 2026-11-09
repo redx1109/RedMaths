@@ -4,8 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RedMaths — Mathematics, from counting to research</title>
-<link rel="icon" type="image/png" href="favicon.png" />
-
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,12 +15,16 @@
 <meta name="description" content="Learn mathematics from counting to research in 5 stages, with prerequisites always visible and interactive demos.">
 <meta property="og:title" content="RedMaths">
 <meta property="og:description" content="Mathematics from the ground up, with a prerequisite map.">
-
 </head>
 
 <body>
 
 <!-- Background Canvas Animation -->
+<div class="hero-bg" aria-hidden="true">
+    <div class="orb a"></div>
+    <div class="orb b"></div>
+    <div class="gridlines"></div>
+</div>
 <canvas id="math-bg"></canvas>
 
 <!-- Background Music -->
@@ -45,11 +48,7 @@
 <!-- ================= HOME VIEW ================= -->
 <main id="view-home" class="view active">
   <section class="hero">
-    <div class="hero-bg" aria-hidden="true">
-      <div class="orb a"></div>
-      <div class="orb b"></div>
-      <div class="gridlines"></div>
-    </div>
+
     <div class="wrap hero-inner">
       
       <div class="hero-logo">
@@ -187,7 +186,7 @@
 </main>
 
 <div class="detail-backdrop" id="detailBackdrop"></div>
-<aside class="detail" id="detail" aria-hidden="true" role="dialog">
+<aside class="detail" id="detail" aria-hidden="true" role="dialog" aria-modal="true" inert>
   <button class="detail-close" id="detailClose" aria-label="Close">✕</button>
   <div id="detailContent"></div>
 </aside>
