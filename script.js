@@ -446,9 +446,6 @@ function openDetail(id){
   document.getElementById('detailClose').focus();
   detailBack.classList.add('open');
   detail.setAttribute('aria-hidden','false');
-  document.body.style.overflow = 'hidden';
-  detail.inert = true;
-  if (lastFocus) lastFocus.focus();
 }
 function closeDetail(){
   activeDetailId = null;
@@ -456,6 +453,9 @@ function closeDetail(){
   detailBack.classList.remove('open');
   detail.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
+  document.body.style.overflow = 'hidden';
+  detail.inert = true;
+  if (lastFocus) lastFocus.focus();
 }
 
 /* ============================================================
