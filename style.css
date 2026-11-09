@@ -434,6 +434,6 @@ footer .mono{font:500 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:u
   .journey-head p{display:none}
   .journey-head h2{font-size:26px}
 }
-
+.flowchart-shell{touch-action:pan-x pan-y}
 .journey{position:relative}
 .journey-head .back-btn{position:absolute;top:12px;left:16px;margin:0}
