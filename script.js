@@ -35,6 +35,7 @@ function tex(src){
 function navigate(viewId) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById(`view-${viewId}`).classList.add('active');
+  if (viewId === 'home') draw();
   window.scrollTo(0, 0);
 }
 
@@ -169,7 +170,7 @@ function changeZoom(delta) {
 /* ============================================================
    FOCUS & INTERACTION (Desktop Only Hover)
    ============================================================ */
-const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+const isTouchDevice = !matchMedia('(hover: hover)').matches;
 
 function focusNode(id){
   if (isTouchDevice) return; // Disable sticky hover states on mobile
@@ -246,7 +247,7 @@ function openDetail(id){
       </button>
     </div>`;
 
-  lastFocus = document.activeElement;
+  if (!detail.classList.contains('open')) lastFocus = document.activeElement;
   detail.inert = false;
   detail.classList.add('open');
   document.getElementById('detailClose').focus();
@@ -346,6 +347,8 @@ document.addEventListener('keydown', e => {
 });
 
 /* theme */
+const getTheme = () => { try { return getTheme() } catch(e){ return null } };
+const setTheme = t => { try { localStorage.setItem('redmaths.theme', t) } catch(e){} };
 const themeBtn = document.getElementById('themeBtn');
 const root = document.documentElement;
 (function(){ if(localStorage.getItem('redmaths.theme')==='light') root.dataset.theme='light';
@@ -354,7 +357,7 @@ themeBtn.addEventListener('click', () => {
   const light = root.dataset.theme === 'light';
   root.dataset.theme = light ? 'dark' : 'light';
   themeBtn.textContent = light ? '☾' : '☀';
-  localStorage.setItem('redmaths.theme', root.dataset.theme);
+  setTheme(root.dataset.theme);
   draw();
 });
 
