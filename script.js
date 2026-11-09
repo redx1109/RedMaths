@@ -111,7 +111,8 @@ const musicPlayer = document.getElementById('musicPlayer');
 const musicText = document.querySelector('.music-text');
 const audioPrompt = document.getElementById('audioPrompt');
 
-music.volume = 0.7;
+music.volume = 0.35;
+music.addEventListener('error', () => { musicPlayer.style.display = 'none'; });
 
 function updateMusicUI(isPlaying) {
   if (isPlaying) {
@@ -188,6 +189,7 @@ function initCanvas() {
 }
 
 function drawCanvas() {
+  if (document.hidden) { requestAnimationFrame(drawCanvas); return; }
   bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
   const isLight = document.documentElement.dataset.theme === 'light';
   const color = isLight ? '0,0,0' : '255,255,255';
