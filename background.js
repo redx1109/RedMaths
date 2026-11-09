@@ -59,5 +59,9 @@ function drawCanvas() {
 }
 
 initCanvas();
-drawCanvas();
-window.addEventListener('resize', initCanvas);
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) drawCanvas();
+let lastW = innerWidth;
+addEventListener('resize', () => {
+  if (innerWidth !== lastW) { lastW = innerWidth; initCanvas(); }
+  else bgCanvas.height = innerHeight;
+});
