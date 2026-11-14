@@ -29,12 +29,23 @@ function tex(src){
   catch(e){ return src }
 }
 
+function rich(s){ return s.replace(/\$([^$]+)\$/g, (_, m) => tex(m)); }
+function studyHTML(l){
+  const sec = (h, b) => `<div class="detail-section"><h4>${h}</h4>${b}</div>`;
+  return [
+    l.study    && sec('Study', l.study.map(p => `<p class="study-p">${rich(p)}</p>`).join('')),
+    l.examples && sec('Worked examples', l.examples.map(e => `<div class="study-card"><b>${rich(e.q)}</b><p>${rich(e.a)}</p></div>`).join('')),
+    l.practice && sec('Practice', `<ol class="study-ol">${l.practice.map(p => `<li>${rich(p)}</li>`).join('')}</ol>`)
+  ].filter(Boolean).join('');
+}
+
 /* ============================================================
    NAVIGATION & LAYOUT ENGINE
    ============================================================ */
 function navigate(viewId) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById(`view-${viewId}`).classList.add('active');
+  document.body.dataset.view = viewId;
   if (viewId === 'home') draw();
   window.scrollTo(0, 0);
   if (viewId !== 'stage') history.replaceState(null, '', viewId === 'home' ? location.pathname : '#' + viewId);
@@ -240,6 +251,7 @@ function openDetail(id){
     <h3>${lesson.title}</h3>
     <p class="detail-intuition">${lesson.intuition}</p>
     <div class="detail-formula">${tex(lesson.formula)}</div>
+    ${studyHTML(lesson)}
     <div class="detail-section"><h4>Prerequisites</h4><ul>${prereqRows}</ul></div>
     <div class="detail-section"><h4>Unlocks</h4><ul>${unlockRows}</ul></div>
     <div class="detail-actions">
@@ -372,11 +384,11 @@ shell.addEventListener('wheel', e => {
 }, {passive:false});
 
 /* theme */
-const getTheme = () => { try { return getTheme() } catch(e){ return null } };
+const getTheme = () => { try { return localStorage.getItem('redmaths.theme') } catch(e){ return null } };
 const setTheme = t => { try { localStorage.setItem('redmaths.theme', t) } catch(e){} };
 const themeBtn = document.getElementById('themeBtn');
 const root = document.documentElement;
-(function(){ if(localStorage.getItem('redmaths.theme')==='light') root.dataset.theme='light';
+(function(){ if(getTheme()==='light') root.dataset.theme='light';
   themeBtn.textContent = root.dataset.theme === 'light' ? '☀' : '☾'; })();
 themeBtn.addEventListener('click', () => {
   const light = root.dataset.theme === 'light';
