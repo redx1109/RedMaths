@@ -1,14 +1,8 @@
 /* ============================================================
    DATA & LEVELS
    ============================================================ */
-const LEVELS = { 
-  '00':'Origin',
-  '01':'Structure',
-  '02':'Dynamics',
-  '03':'Abstraction',
-  '04':'Frontier'
-};
-const LEVEL_ORDER = ['00','01','02','03','04'];
+const LEVELS = { '00':'Origin','01':'Structure','02':'Dynamics','03':'Abstraction','04':'Postgraduate','05':'Doctoral' };
+const LEVEL_ORDER = ['00','01','02','03','04','05'];
 
 const LESSONS = [
   /* 00 · Origin (7) */
@@ -62,14 +56,73 @@ const LESSONS = [
   { id:'a12', level:'03', title:'Multivariable calculus', intuition:'Functions of several variables. Derivatives become vectors.', formula:'\\nabla f = (\\partial_{x_1}f,\\dots,\\partial_{x_n}f)', needs:['i6'] },
 
   /* 04 · Frontier (8) */
-  { id:'r1', level:'04', title:'Algebraic geometry', intuition:'Geometry as the zero sets of polynomials.', formula:'V(I) = \\{x : f(x)=0\\;\\forall f\\in I\\}', needs:['a3'] },
-  { id:'r2', level:'04', title:'Homological algebra', intuition:'Measure how far a sequence is from exact.', formula:'\\cdots\\to C_{n+1}\\xrightarrow{\\partial}C_n\\to\\cdots', needs:['a3'] },
-  { id:'r3', level:'04', title:'Lie groups', intuition:'A smooth group. Near the identity it is a Lie algebra.', formula:'[X,Y] = XY-YX', needs:['a1','a8'] },
-  { id:'r4', level:'04', title:'Representation theory', intuition:'Turn abstract groups into matrices so you can compute.', formula:'\\rho : G\\to\\mathrm{GL}(V)', needs:['a1','a5'] },
-  { id:'r5', level:'04', title:'Riemannian geometry', intuition:'A smooth manifold with a metric on each tangent space.', formula:'ds^{2} = g_{ij}\\,dx^{i}dx^{j}', needs:['a12','a8'] },
-  { id:'r6', level:'04', title:'Functional analysis', intuition:'Linear operators on infinite-dimensional spaces.', formula:'\\|Tx\\|\\le C\\|x\\|', needs:['a5','a11'] },
-  { id:'r7', level:'04', title:'Probability theory', intuition:'Measure theory applied to events.', formula:'P\\Big(\\bigcup_n A_n\\Big) = \\sum_n P(A_n)', needs:['a11','b10'] },
-  { id:'r8', level:'04', title:'Stochastic processes', intuition:'Random variables indexed by time.', formula:'\\mathbb{E}[X_{t+s}\\mid\\mathcal{F}_s] = X_s', needs:['r7'] }
+  { id:'r1', level:'05', title:'Algebraic geometry', intuition:'Geometry as the zero sets of polynomials.', formula:'V(I) = \\{x : f(x)=0\\;\\forall f\\in I\\}', needs:['a3'] },
+  { id:'r2', level:'05', title:'Homological algebra', intuition:'Measure how far a sequence is from exact.', formula:'\\cdots\\to C_{n+1}\\xrightarrow{\\partial}C_n\\to\\cdots', needs:['a3'] },
+  { id:'r3', level:'05', title:'Lie groups', intuition:'A smooth group. Near the identity it is a Lie algebra.', formula:'[X,Y] = XY-YX', needs:['a1','a8'] },
+  { id:'r4', level:'05', title:'Representation theory', intuition:'Turn abstract groups into matrices so you can compute.', formula:'\\rho : G\\to\\mathrm{GL}(V)', needs:['a1','a5'] },
+  { id:'r5', level:'05', title:'Riemannian geometry', intuition:'A smooth manifold with a metric on each tangent space.', formula:'ds^{2} = g_{ij}\\,dx^{i}dx^{j}', needs:['a12','a8'] },
+  { id:'r6', level:'05', title:'Operator theory', intuition:'Linear operators on infinite-dimensional spaces.', formula:'\\|Tx\\|\\le C\\|x\\|', needs:['a5','a11'] },
+  { id:'r7', level:'05', title:'Probability theory', intuition:'Measure theory applied to events.', formula:'P\\Big(\\bigcup_n A_n\\Big) = \\sum_n P(A_n)', needs:['a11','b10'] },
+  { id:'r8', level:'05', title:'Stochastic processes', intuition:'Random variables indexed by time.', formula:'\\mathbb{E}[X_{t+s}\\mid\\mathcal{F}_s] = X_s', needs:['r7'] },
+
+  /* 04 · Postgraduate / MSc (34) */
+  { id:'p1', level:'04', title:'Uniform convergence', intuition:'Functions converging together at one speed, not point by point.', formula:'\\sup_x|f_n(x)-f(x)|\\to0', needs:['i11','i13'] },
+  { id:'p2', level:'04', title:'Riemann–Stieltjes integral', intuition:'Integrate against a weight that can jump or bend.', formula:'\\int_a^b f\\,d\\alpha', needs:['i5','i13'] },
+  { id:'p3', level:'04', title:'Lebesgue integration', intuition:'Slice the range instead of the domain.', formula:'\\int f\\,d\\mu=\\sup_{s\\le f}\\int s\\,d\\mu', needs:['a11'] },
+  { id:'p4', level:'04', title:'Dominated convergence', intuition:'If one integrable function bounds the sequence, limits pass through integrals.', formula:'\\lim\\int f_n=\\int\\lim f_n', needs:['p3'] },
+  { id:'p5', level:'04', title:'Analytic functions', intuition:'Complex differentiable means Cauchy–Riemann holds.', formula:'u_x=v_y,\\;u_y=-v_x', needs:['a10'] },
+  { id:'p6', level:'04', title:'Residue theorem', intuition:'A contour integral only sees the poles inside.', formula:'\\oint_\\gamma f\\,dz=2\\pi i\\sum\\mathrm{Res}(f,a_k)', needs:['p5'] },
+  { id:'p7', level:'04', title:'Conformal maps', intuition:'Angle-preserving maps. Möbius maps send circles to circles.', formula:'w=\\frac{az+b}{cz+d}', needs:['p5'] },
+  { id:'p8', level:'04', title:'Sylow theorems', intuition:'Prime-power subgroups always exist, and their count is tightly constrained.', formula:'n_p\\equiv1\\pmod p', needs:['a1'] },
+  { id:'p9', level:'04', title:'Ideals & quotient rings', intuition:'Ideals are to rings what normal subgroups are to groups.', formula:'R/I', needs:['a2'] },
+  { id:'p10', level:'04', title:'PID & UFD', intuition:'When does unique factorization survive outside the integers?', formula:'\\text{PID}\\Rightarrow\\text{UFD}', needs:['p9'] },
+  { id:'p11', level:'04', title:'Field extensions', intuition:'Grow a field by adjoining roots of polynomials.', formula:'[K:F]=[K:E][E:F]', needs:['a3'] },
+  { id:'p12', level:'04', title:'Galois theory', intuition:'Symmetries of the roots decide whether a polynomial is solvable.', formula:'|\\mathrm{Gal}(K/F)|=[K:F]', needs:['p11','p8'] },
+  { id:'p13', level:'04', title:'Jordan form', intuition:'Every matrix is almost diagonal, up to nilpotent bumps.', formula:'A=PJP^{-1}', needs:['a6'] },
+  { id:'p14', level:'04', title:'Inner product spaces', intuition:'Add angles and lengths to a vector space.', formula:'|\\langle u,v\\rangle|\\le\\|u\\|\\|v\\|', needs:['a4'] },
+  { id:'p15', level:'04', title:'Spectral theorem', intuition:'Symmetric matrices diagonalize in an orthonormal basis.', formula:'A=Q\\Lambda Q^{T}', needs:['a6','p14'] },
+  { id:'p16', level:'04', title:'Connectedness', intuition:'A space that cannot be split into two disjoint open pieces.', formula:'X\\neq U\\sqcup V', needs:['a7'] },
+  { id:'p17', level:'04', title:'Product & quotient topology', intuition:'Build new spaces by gluing and multiplying.', formula:'X/{\\sim}', needs:['a7'] },
+  { id:'p18', level:'04', title:'Fundamental group', intuition:'Loops up to deformation count the holes.', formula:'\\pi_1(S^1)\\cong\\mathbb{Z}', needs:['a9','a1'] },
+  { id:'p19', level:'04', title:'ODE existence & uniqueness', intuition:'Picard iteration: a unique solution exists when f is Lipschitz.', formula:"y'=f(x,y),\\;y(x_0)=y_0", needs:['i6','a8'] },
+  { id:'p20', level:'04', title:'Laplace equation', intuition:'Steady state: each value is the average of its neighbours.', formula:'\\Delta u=0', needs:['a12'] },
+  { id:'p21', level:'04', title:'Heat equation', intuition:'Heat flows from hot to cold and smooths everything out.', formula:'u_t=k\\,u_{xx}', needs:['p20'] },
+  { id:'p22', level:'04', title:'Wave equation', intuition:'Disturbances travel at finite speed.', formula:'u_{tt}=c^{2}u_{xx}', needs:['p20'] },
+  { id:'p23', level:'04', title:'Banach spaces', intuition:'Complete normed spaces: Cauchy sequences always converge.', formula:'(X,\\|\\cdot\\|)\\;\\text{complete}', needs:['p14','a8'] },
+  { id:'p24', level:'04', title:'Hilbert spaces', intuition:'Infinite-dimensional spaces where geometry still works.', formula:'x=\\sum_n\\langle x,e_n\\rangle e_n', needs:['p14','p23'] },
+  { id:'p25', level:'04', title:'Interpolation', intuition:'Pass a polynomial through given points.', formula:'P(x)=\\sum_i y_i\\ell_i(x)', needs:['b4','i9'] },
+  { id:'p26', level:'04', title:'Root finding', intuition:'Newton: follow the tangent line down to the root.', formula:"x_{n+1}=x_n-\\frac{f(x_n)}{f'(x_n)}", needs:['i3'] },
+  { id:'p27', level:'04', title:'Numerical integration', intuition:'Approximate area with trapezoids or parabolas.', formula:'\\int_a^b f\\approx\\frac{h}{2}\\Big[f_0+2\\sum_{i=1}^{n-1}f_i+f_n\\Big]', needs:['i5'] },
+  { id:'p28', level:'04', title:'Differential geometry', intuition:'Curvature measures how fast a curve or surface bends.', formula:"\\kappa=\\|\\gamma''\\|", needs:['a12'] },
+  { id:'p29', level:'04', title:'Probability & statistics', intuition:'Distributions, expectation, and the central limit theorem.', formula:'\\mathrm{Var}(X)=\\mathbb{E}[X^{2}]-\\mathbb{E}[X]^{2}', needs:['b10'] },
+  { id:'p30', level:'04', title:'Linear programming', intuition:'Optimize a linear goal inside a polytope.', formula:'\\max\\,c^{T}x\\;\\text{s.t.}\\;Ax\\le b', needs:['i9'] },
+  { id:'p31', level:'04', title:'Fluid mechanics', intuition:'Navier–Stokes: momentum balance for a flowing fluid.', formula:'\\rho(u_t+u\\cdot\\nabla u)=-\\nabla p+\\mu\\Delta u', needs:['p20'] },
+  { id:'p32', level:'04', title:'Number theory', intuition:'Arithmetic modulo primes.', formula:'a^{p-1}\\equiv1\\pmod p', needs:['a3'] },
+  { id:'p33', level:'04', title:'Graph theory', intuition:'Vertices and edges: the mathematics of networks.', formula:'\\sum_v\\deg v=2|E|', needs:['b9'] },
+  { id:'p34', level:'04', title:'Mathematical modelling', intuition:'Turn a real system into equations and study how it behaves.', formula:'\\dot x=f(x,\\mu)', needs:['p19'] },
+
+  /* 05 · Doctoral / PhD (new 21, plus the 8 old Frontier lessons) */
+  { id:'d1', level:'05', title:'Commutative algebra', intuition:'Study rings through their prime ideals.', formula:'\\mathrm{Spec}(R)', needs:['p9'] },
+  { id:'d2', level:'05', title:'Algebraic topology', intuition:'Assign algebraic invariants to spaces.', formula:'H_n(X)', needs:['p18','r2'] },
+  { id:'d3', level:'05', title:'Algebraic number theory', intuition:'Factorization in rings of integers of number fields.', formula:'\\mathcal{O}_K', needs:['p32','p12'] },
+  { id:'d4', level:'05', title:'Analytic number theory', intuition:'Use complex analysis to count primes.', formula:'\\zeta(s)=\\prod_p(1-p^{-s})^{-1}', needs:['p6','p32'] },
+  { id:'d5', level:'05', title:'Harmonic analysis', intuition:'Break functions into waves.', formula:'\\hat f(\\xi)=\\int f(x)e^{-2\\pi ix\\xi}\\,dx', needs:['p4'] },
+  { id:'d6', level:'05', title:'Operator algebras', intuition:'Algebras of operators acting on Hilbert space.', formula:'\\|a^{*}a\\|=\\|a\\|^{2}', needs:['p24'] },
+  { id:'d7', level:'05', title:'Sobolev spaces & PDE', intuition:'Weak derivatives let rough functions solve PDEs.', formula:'W^{k,p}(\\Omega)', needs:['p20','p24'] },
+  { id:'d8', level:'05', title:'Dynamical systems', intuition:'Long-term behaviour under repeated iteration.', formula:'x_{n+1}=f(x_n)', needs:['p19'] },
+  { id:'d9', level:'05', title:'Several complex variables', intuition:'Holomorphy in more than one variable behaves strangely.', formula:'\\partial f/\\partial\\bar z_j=0', needs:['p5','a12'] },
+  { id:'d10', level:'05', title:'Geometric measure theory', intuition:'Measure the size of fractal and rough sets.', formula:'\\mathcal{H}^{s}(E)', needs:['p3'] },
+  { id:'d11', level:'05', title:'Numerical PDE', intuition:'Discretize space and time, then march forward.', formula:'u_t\\approx\\frac{u^{n+1}-u^{n}}{\\Delta t}', needs:['p21','p27'] },
+  { id:'d12', level:'05', title:'Optimization', intuition:'Find minima with gradients and constraints.', formula:'\\nabla f(x^{*})=0', needs:['a12','p30'] },
+  { id:'d13', level:'05', title:'Control theory', intuition:'Steer a system to a goal using feedback.', formula:'\\dot x=Ax+Bu', needs:['p19','p13'] },
+  { id:'d14', level:'05', title:'Mathematical biology', intuition:'Populations, epidemics, and cells as dynamical systems.', formula:'\\dot N=rN\\Big(1-\\frac{N}{K}\\Big)', needs:['p34'] },
+  { id:'d15', level:'05', title:'Fractional calculus', intuition:'Derivatives of non-integer order.', formula:'D^{\\alpha}f', needs:['p2'] },
+  { id:'d16', level:'05', title:'Stochastic calculus', intuition:'Calculus for paths that are nowhere smooth.', formula:'dX_t=\\mu\\,dt+\\sigma\\,dW_t', needs:['r8'] },
+  { id:'d17', level:'05', title:'Random matrices', intuition:'Eigenvalues of huge random matrices follow universal laws.', formula:'\\rho(x)=\\frac{1}{2\\pi}\\sqrt{4-x^{2}}', needs:['p15','r7'] },
+  { id:'d18', level:'05', title:'Machine learning theory', intuition:'When and why learning from data generalizes.', formula:'R(h)\\le\\hat R(h)+O\\Big(\\sqrt{\\tfrac{d}{n}}\\Big)', needs:['r7','p24'] },
+  { id:'d19', level:'05', title:'Combinatorics', intuition:'Counting structures cleverly.', formula:'\\sum_k\\binom{n}{k}=2^{n}', needs:['b9','p33'] },
+  { id:'d20', level:'05', title:'Coding theory', intuition:'Add redundancy so errors can be detected and fixed.', formula:'d_{\\min}\\ge2t+1', needs:['a3','p33'] },
+  { id:'d21', level:'05', title:'Cryptography', intuition:'Number theory that hides secrets.', formula:'c\\equiv m^{e}\\pmod n', needs:['p32'] }
 ];
 const unlocks = {};
 LESSONS.forEach(l => l.needs.forEach(n => (unlocks[n] = unlocks[n] || []).push(l.id)));
