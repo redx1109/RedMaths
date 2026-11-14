@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <link rel="stylesheet" href="style.css">
 
-<meta name="description" content="Learn mathematics from counting to research in 5 stages, with prerequisites always visible and interactive demos.">
+<meta name="description" content="Learn mathematics from counting to research in 6 stages, with prerequisites always visible and interactive demos.">
 <meta property="og:title" content="RedMaths">
 <meta property="og:description" content="Mathematics from the ground up, with a prerequisite map.">
 </head>
@@ -39,7 +39,8 @@
       <a onclick="navigateStage('01')">Structure</a>
       <a onclick="navigateStage('02')">Dynamics</a>
       <a onclick="navigateStage('03')">Abstraction</a>
-      <a onclick="navigateStage('04')">Frontier</a>
+      <a onclick="navigateStage('04')">Postgraduate</a>
+      <a onclick="navigateStage('05')">Doctoral</a>
     </nav>
     <button class="toggle" id="themeBtn" aria-label="Toggle theme">☾</button>
   </div>
@@ -73,7 +74,7 @@
   <section class="tracks">
     <div class="wrap">
       <div class="sec-head" style="margin-bottom:24px; text-align:center;">
-        <h2 style="font:400 28px/1.1 var(--f-disp);margin:0 0 8px">The Five Stages</h2>
+        <h2 style="font:400 28px/1.1 var(--f-disp);margin:0 0 8px">The Six Stages</h2>
         <p style="color:var(--muted);max-width:50ch;margin:0 auto;font-size:14px;">Mathematical maturity is a journey. Start at the foundation and work your way to the research frontier.</p>
       </div>
       
@@ -113,14 +114,23 @@
           </div>
           <div class="track-count">12 Lessons</div>
         </div>
-        
+
         <div class="track-card" style="--track-color: var(--lvl-04)" onclick="navigateStage('04')">
           <div class="track-num">05</div>
           <div>
-            <div class="track-title">Frontier</div>
-            <div class="track-desc">Research-level topics and modern geometry.</div>
+            <div class="track-title">Postgraduate</div>
+            <div class="track-desc">MSc-level analysis, algebra, topology and more.</div>
           </div>
-          <div class="track-count">8 Lessons</div>
+          <div class="track-count">34 Lessons</div>
+        </div>
+
+        <div class="track-card" style="--track-color: var(--lvl-05)" onclick="navigateStage('05')">
+          <div class="track-num">06</div>
+          <div>
+            <div class="track-title">Doctoral</div>
+            <div class="track-desc">Research areas, from number theory to ML theory.</div>
+          </div>
+          <div class="track-count">29 Lessons</div>
         </div>
       </div>
     </div>
@@ -160,38 +170,43 @@
     <div class="wrap journey-head">
       <div class="back-btn" onclick="navigate('home')">← Back</div>
       <h2>Choose your path</h2>
-      <p>Five stages, one map. Tap a stage to enter it.</p>
+      <p>Six stages, one map. Tap a stage to enter it.</p>
     </div>
     <div class="journey-map">
       <svg class="journey-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <path class="jp jp-d" d="M12 68 C 21 68, 21 30, 30 30 C 40 30, 40 62, 50 62 C 60 62, 60 28, 70 28 C 79 28, 79 60, 88 60"/>
-        <path class="jp jp-m" d="M28 9 C 28 18, 72 18, 72 27 C 72 36, 30 36, 30 45 C 30 54, 70 54, 70 63 C 70 72, 38 72, 38 81"/>
+        <path class="jp jp-d" d="M8 68 C 16 68, 16 30, 24 30 C 33 30, 33 62, 41 62 C 50 62, 50 28, 58 28 C 67 28, 67 60, 75 60 C 83 60, 83 26, 91 26"/>
+        <path class="jp jp-m" d="M28 8 C 28 16, 72 16, 72 24 C 72 32, 30 32, 30 40 C 30 48, 70 48, 70 56 C 70 64, 38 64, 38 72 C 38 80, 66 80, 66 88"/>
       </svg>
 
-      <button class="jnode" style="--c:var(--lvl-00);--x:12%;--y:68%;--mx:28%;--my:9%" onclick="navigateStage('00')">
+      <button class="jnode" style="--c:var(--lvl-00);--x:8%;--y:68%;--mx:28%;--my:8%" onclick="navigateStage('00')">
         <span class="jnum">01</span><span class="jname">Origin</span>
         <span class="jdesc">Numbers, basic operations, and the birth of algebra.</span>
         <span class="jcount">7 lessons</span>
       </button>
-      <button class="jnode" style="--c:var(--lvl-01);--x:30%;--y:30%;--mx:72%;--my:27%" onclick="navigateStage('01')">
+      <button class="jnode" style="--c:var(--lvl-01);--x:24%;--y:30%;--mx:72%;--my:24%" onclick="navigateStage('01')">
         <span class="jnum">02</span><span class="jname">Structure</span>
         <span class="jdesc">Functions, geometry, and the rules that govern them.</span>
         <span class="jcount">10 lessons</span>
       </button>
-      <button class="jnode" style="--c:var(--lvl-02);--x:50%;--y:62%;--mx:30%;--my:45%" onclick="navigateStage('02')">
+      <button class="jnode" style="--c:var(--lvl-02);--x:41%;--y:62%;--mx:30%;--my:40%" onclick="navigateStage('02')">
         <span class="jnum">03</span><span class="jname">Dynamics</span>
         <span class="jdesc">Calculus, limits, and the mathematics of change.</span>
         <span class="jcount">13 lessons</span>
       </button>
-      <button class="jnode" style="--c:var(--lvl-03);--x:70%;--y:28%;--mx:70%;--my:63%" onclick="navigateStage('03')">
+      <button class="jnode" style="--c:var(--lvl-03);--x:58%;--y:28%;--mx:70%;--my:56%" onclick="navigateStage('03')">
         <span class="jnum">04</span><span class="jname">Abstraction</span>
         <span class="jdesc">Groups, topology, and the deep structures of math.</span>
         <span class="jcount">12 lessons</span>
       </button>
-      <button class="jnode" style="--c:var(--lvl-04);--x:88%;--y:60%;--mx:38%;--my:81%" onclick="navigateStage('04')">
-        <span class="jnum">05</span><span class="jname">Frontier</span>
-        <span class="jdesc">Research-level topics and modern geometry.</span>
-        <span class="jcount">8 lessons</span>
+      <button class="jnode" style="--c:var(--lvl-04);--x:75%;--y:60%;--mx:38%;--my:72%" onclick="navigateStage('04')">
+        <span class="jnum">05</span><span class="jname">Postgraduate</span>
+        <span class="jdesc">MSc-level analysis, algebra, topology and more.</span>
+        <span class="jcount">34 lessons</span>
+      </button>
+      <button class="jnode" style="--c:var(--lvl-05);--x:91%;--y:26%;--mx:66%;--my:88%" onclick="navigateStage('05')">
+        <span class="jnum">06</span><span class="jname">Doctoral</span>
+        <span class="jdesc">Research areas, from number theory to ML theory.</span>
+        <span class="jcount">29 lessons</span>
       </button>
     </div>
   </div>
@@ -256,7 +271,7 @@
       <div class="brand"><span class="brand-red">Red</span>Maths</div>
       <p style="margin-top:4px">Built from the ground up. Sibling of RedPhysics.</p>
     </div>
-    <p class="mono">00 → 04 · prerequisites always visible</p>
+    <p class="mono">00 → 05 · prerequisites always visible</p>
   </div>
 </footer>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
